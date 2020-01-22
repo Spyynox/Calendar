@@ -23,6 +23,7 @@ class Availability
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="availabilities")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
+     * @Groups("post:read")
      */
     private $doctor;
 

@@ -33,7 +33,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("post:read")
      */
     private $roles = ['ROLE_CLIENT'];
 
@@ -58,7 +57,6 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Availability", mappedBy="doctor")
-     * @Groups("post:read")
      */
     private $availabilities;
 

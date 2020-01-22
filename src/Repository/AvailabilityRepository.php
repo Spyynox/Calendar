@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Availability;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Availability|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,10 +15,43 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class AvailabilityRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $manager;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        EntityManagerInterface $manager
+    )
     {
         parent::__construct($registry, Availability::class);
+        $this->manager = $manager;
     }
+
+    public function saveAvailability($doctor, $date)
+    {
+        $newAvailability = new Availability();
+
+        $newAvailability
+            ->setDoctor($doctor)
+            ->setDate($date);
+
+        $this->manager->persist($newAvailability);
+        $this->manager->flush();
+    }
+
+    public function updatedAvailability(Availability $availability): Availability
+    {
+        $this->manager->persist($availability);
+        $this->manager->flush();
+
+        return $availability;
+    }
+
+    public function removeAvailability(Availability $availability)
+    {
+        $this->manager->remove($availability);
+        $this->manager->flush();
+    }
+
 
     // /**
     //  * @return Availability[] Returns an array of Availability objects
