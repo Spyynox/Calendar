@@ -45,6 +45,15 @@ class AvailabilityRepository extends ServiceEntityRepository
 
         return $availability;
     }
+    
+    // public function toArray()
+    // {
+    //     return [
+    //         'id' => $this->getId(),
+    //         'date' => $this->date,
+    //         'doctor' => $this->doctor->toArray()
+    //     ];
+    // }
 
     public function removeAvailability(Availability $availability)
     {

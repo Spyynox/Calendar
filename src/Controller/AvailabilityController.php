@@ -34,6 +34,22 @@ class AvailabilityController extends AbstractController
         return $this->json($availabilitys, 200, [], ['groups' => 'post:read']);
     }
 
+    /**
+     * @Route("/papi/availability/{id}", name="get_one_availability", methods={"GET"})
+     */
+    public function get($id): JsonResponse
+    {
+        $availability = $this->availabilityRepository->findOneBy(['id' => $id]);
+
+        $data = [
+            'id' => $availability->getId(),
+            'doctor' => $availability->getDoctor(),
+            'date' => $availability->getDate(),
+        ];
+
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+
 
     /**
      * @Route("/papi/availability", name="api_availability_store", methods={"POST"})
@@ -73,10 +89,10 @@ class AvailabilityController extends AbstractController
 
         empty($data['date']) ? true : $availability->setDate(new \DateTime($data['date']));
 
-        $updatedAvailability = $this->availabilityRepository->updateAvailability($availability);
+        $updatedAvailability = $this->availabilityRepository->updatedAvailability($availability);
 
         return new JsonResponse($updatedAvailability->toArray(), Response::HTTP_OK);
-    }
+    }    
 
 
     /**

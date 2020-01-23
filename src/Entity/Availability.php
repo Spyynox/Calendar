@@ -66,4 +66,13 @@ class Availability
     {
         return $this->getDoctor();
     }
+
+    public function toArray()
+     {
+       return [
+            'id' => $this->getId(),
+            'date' => $this->date,
+            'doctor' => $this->doctor
+        ];
+    }
 }
