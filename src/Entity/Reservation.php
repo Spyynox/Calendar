@@ -4,9 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"reservations_read"}
+ *  }
+ * )
  */
 class Reservation
 {
@@ -14,18 +20,21 @@ class Reservation
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"reservations_read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reservationsClient")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"reservations_read"})
      */
     private $client;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reservationsDoctor")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"reservations_read"})
      */
     private $doctor;
 

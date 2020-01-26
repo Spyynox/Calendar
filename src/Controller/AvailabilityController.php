@@ -25,7 +25,7 @@ class AvailabilityController extends AbstractController
     }
     
     /**
-     * @Route("/papi/availability", name="api_availability_index", methods={"GET"})
+     * @Route("/apis/availability", name="api_availability_index", methods={"GET"})
      */
     public function index(AvailabilityRepository $availabilityRepository, SerializerInterface $serializer)
     {
@@ -35,7 +35,7 @@ class AvailabilityController extends AbstractController
     }
 
     /**
-     * @Route("/papi/availability/{id}", name="get_one_availability", methods={"GET"})
+     * @Route("/apis/availability/{id}", name="get_one_availability", methods={"GET"})
      */
     public function get($id): JsonResponse
     {
@@ -52,7 +52,7 @@ class AvailabilityController extends AbstractController
 
 
     /**
-     * @Route("/papi/availability", name="api_availability_store", methods={"POST"})
+     * @Route("/apis/availability", name="api_availability_store", methods={"POST"})
      */
     public function store(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator)
     {
@@ -80,7 +80,7 @@ class AvailabilityController extends AbstractController
     }
 
     /**
-     * @Route("/papi/availability/{id}", name="update_availability", methods={"PUT"})
+     * @Route("/apis/availability/{id}", name="update_availability", methods={"PUT"})
      */
     public function update($id, Request $request): JsonResponse
     {
@@ -96,7 +96,7 @@ class AvailabilityController extends AbstractController
 
 
     /**
-     * @Route("/papi/availability/{id}", name="delete_availability", methods={"DELETE"})
+     * @Route("/apis/availability/{id}", name="delete_availability", methods={"DELETE"})
      */
     public function delete($id): JsonResponse
     {

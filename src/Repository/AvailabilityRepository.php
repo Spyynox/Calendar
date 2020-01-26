@@ -71,7 +71,7 @@ class AvailabilityRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT p, u.fullname
+            'SELECT p.date, u.fullname
             FROM App\Entity\Availability p
             INNER JOIN p.doctor u
             WHERE p.doctor = u.id'

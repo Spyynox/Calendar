@@ -7,7 +7,11 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"availabilities_read"}
+ *  }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\AvailabilityRepository")
  */
 class Availability
@@ -16,20 +20,23 @@ class Availability
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("post:read")
+     * @Groups("posta:read")
+     * @Groups({"availabilities_read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="availabilities")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
-     * @Groups("post:read")
+     * @Groups("posta:read")
+     * @Groups({"availabilities_read"})
      */
     private $doctor;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("post:read")
+     * @Groups("posta:read")
+     * @Groups({"availabilities_read"})
      */
     private $date;
 

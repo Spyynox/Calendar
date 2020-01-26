@@ -46,12 +46,15 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("post:read")
+     * @Groups({"reservations_read"})
+     * @Groups({"availabilities_read"})
      */
     private $fullname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("post:read")
+     * @Groups({"availabilities_read"})
      */
     private $adress;
 

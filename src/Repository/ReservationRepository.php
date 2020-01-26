@@ -47,4 +47,16 @@ class ReservationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function showAction($reservationId)
+    {
+        $reservation = $this->getDoctrine()
+            ->getRepository('AppBundle:Reservation')
+            ->find($reservationId);
+
+        $reservationName = $reservation->getReservation()->getDoction();
+
+        // ...
+    }
+
 }
