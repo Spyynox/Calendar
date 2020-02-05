@@ -11,7 +11,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"users_read"}
+ *  }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
@@ -22,17 +26,20 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("post:read")
+     * @Groups({"users_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("post:read")
+     * @Groups({"users_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"users_read"})
      */
     private $roles = ['ROLE_CLIENT'];
 
@@ -48,6 +55,7 @@ class User implements UserInterface
      * @Groups("post:read")
      * @Groups({"reservations_read"})
      * @Groups({"availabilities_read"})
+     * @Groups({"users_read"})
      */
     private $fullname;
 
@@ -55,6 +63,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups("post:read")
      * @Groups({"availabilities_read"})
+     * @Groups({"users_read"})
      */
     private $adress;
 
@@ -74,6 +83,11 @@ class User implements UserInterface
      * @Groups("post:read")
      */
     private $reservationsDoctor;
+
+    /**
+      * @ORM\Column(type="string", unique=true, nullable=true)
+      */
+    private $apiToken;
 
     public function __construct()
     {

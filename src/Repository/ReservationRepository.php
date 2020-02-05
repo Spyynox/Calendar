@@ -59,4 +59,19 @@ class ReservationRepository extends ServiceEntityRepository
         // ...
     }
 
+    public function findOneByIdJoinedToCategory()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.date, u.fullname
+            FROM App\Entity\Availability p
+            INNER JOIN p.doctor u
+            WHERE p.doctor = u.id'
+            
+        );
+
+        return $query->getResult();
+    }
+
 }
